@@ -1,0 +1,14 @@
+.header {
+  margin: 0 auto;
+  padding: 24px 0;
+  display: flex;
+  max-width: var(--max-width);
+
+  .header-title {
+    visibility: hidden;
+  }
+
+  .header-logo {
+    width: 60px;
+  }
+}
