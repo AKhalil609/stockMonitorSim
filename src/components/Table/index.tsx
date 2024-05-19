@@ -5,7 +5,6 @@ export interface TableColumn<T> {
     key: keyof T;
     header: string;
     render?: (item: T) => React.ReactNode;
-
 }
 
 interface TableProps<T> {
@@ -34,40 +33,42 @@ const Table = <T extends { isin: string | number }>({ data, columns, selectable,
     const handleCheckboxChange = (isin: string | number) => {
         toggleSelection(isin);
     };
-    return (
-        <div className="table-conatiner">
-            <table className="table">
-                <thead>
-                    <tr>
-                        {selectable && <th></th>}
-                        {columns.map(column => <th key={String(column.key)}>{column.header}</th>)}
-                    </tr>
-                </thead>
-                <tbody>
-                    {data.map((item, index) => (
-                        <tr key={item.isin || index}>
-                            {selectable && (
-                                <td>
-                                    <input
-                                        type="checkbox"
-                                        aria-label={`${item.isin}-checkbox`}
-                                        checked={selected.has(item.isin)}
-                                        onChange={() => handleCheckboxChange(item.isin)}
-                                    />
-                                </td>
-                            )}
-                            {columns.map(column => (
-                                <td key={String(column.key)}>
-                                    {column.render ? column.render(item) : (item[column.key] as React.ReactNode)}
-                                </td>
-                            ))}
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
 
-    )
+    return (
+        <div className="table-container">
+            <div className="table-wrapper">
+                <table className="table">
+                    <thead>
+                        <tr>
+                            {selectable && <th></th>}
+                            {columns.map(column => <th key={String(column.key)}>{column.header}</th>)}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data.map((item, index) => (
+                            <tr key={item.isin || index}>
+                                {selectable && (
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            aria-label={`${item.isin}-checkbox`}
+                                            checked={selected.has(item.isin)}
+                                            onChange={() => handleCheckboxChange(item.isin)}
+                                        />
+                                    </td>
+                                )}
+                                {columns.map(column => (
+                                    <td key={String(column.key)}>
+                                        {column.render ? column.render(item) : (item[column.key] as React.ReactNode)}
+                                    </td>
+                                ))}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    );
 };
 
 export default Table;

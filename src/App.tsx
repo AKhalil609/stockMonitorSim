@@ -11,14 +11,14 @@ function App() {
     <div id='app'>
       <Header />
       <main className="main">
-        {/* <h1 className="heading1">Welcome to the coding challenge</h1>
-        <p>Please take a look at the <code>README.md</code> file for instructions on how to complete this task.</p>
-        <p>
+        <h1 className="heading1">Welcome to stock subscription simulator</h1>
+        <p>Please enter a valid ISIN number in the input to subscribe to.</p>
+        {/* <p>
           In the interest of saving you some time, we have provided a working Vue app with a few components to get you
           started.
         </p>
-        <p>Feel free to use them and change them as you need.</p>
-        <ul className="component-list">
+        <p>Feel free to use them and change them as you need.</p> */}
+        {/* <ul className="component-list">
           <li>
             <p><code>TextField</code></p>
             <TextField placeholder="Placeholder" />

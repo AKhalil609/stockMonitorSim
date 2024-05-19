@@ -1,5 +1,6 @@
 import React from 'react';
 import TextField from '../TextField';
+import "./style.scss";
 
 interface ISINInputProps {
   value: string;
@@ -8,9 +9,9 @@ interface ISINInputProps {
 }
 
 const ISINInput = ({ value, onChange, errorMessage }: ISINInputProps) => (
-  <div>
+  <div className='input-container'>
     <TextField value={value} onChange={onChange} placeholder="Enter ISIN" />
-    {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
+    {errorMessage && !!value.length && <div style={{ color: 'red' }}>{errorMessage}</div>}
   </div>
 );
 

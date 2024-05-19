@@ -6,7 +6,7 @@ export const useISINValidation = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const validateISIN = useCallback(debounce((isin: string) => {
-    const regex = /^[A-Z]{2}[A-Z0-9]{9}[0-9]$/;    
+    const regex = /^[A-Z]{2}[A-Z0-9]{9}[0-9]$/i;   
     if (regex.test(isin)) {
       setIsValidISIN(true);
       setErrorMessage('');

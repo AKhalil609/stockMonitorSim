@@ -37,7 +37,6 @@ describe('StockSubscriber', () => {
     render(<StockSubscriber />);
 
     expect(screen.getByLabelText('subscribe')).toBeDisabled();
-    expect(screen.getByLabelText('unsubscribe')).toBeDisabled();
     expect(screen.getByText('Connected to the server.')).toBeInTheDocument();
   });
 
@@ -80,7 +79,7 @@ describe('StockSubscriber', () => {
     fireEvent.change(screen.getByRole('textbox'), { target: { value: 'validISIN' } });
     fireEvent.click(screen.getByLabelText('subscribe'));
 
-    expect(stockService.subscribeToStock).toHaveBeenCalledWith('validISIN');
+    expect(stockService.subscribeToStock).toHaveBeenCalledWith('VALIDISIN');
   });
 
   it('should call unsubscribeFromStocks when unsubscribe button is clicked', async () => {

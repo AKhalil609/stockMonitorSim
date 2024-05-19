@@ -6,6 +6,7 @@ import Button from '../Button';
 import { useStockService, stockService } from '../hooks/useStockService';
 import { useISINValidation } from '../hooks/useISINValidation';
 import ISINInput from '../ISINInput';
+import SubscribeUnsubscribeButton from '../SubscribeUnsubscribeButton';
 
 const columns: TableColumn<StockData>[] = [
     { key: 'isin', header: 'ISIN' },
@@ -15,13 +16,14 @@ const columns: TableColumn<StockData>[] = [
 ];
 
 const StockSubscriber = () => {
-    const { stocksData, subscriptions, connectionStatus } = useStockService();
+    const { stocksData, connectionStatus } = useStockService();
     const [isinInput, setIsinInput] = useState('');
     const { isValidISIN, errorMessage, validateISIN } = useISINValidation();
     const [notification, setNotification] = useState<{ message: string; type: 'error' | 'info' } | null>(null);
     const [selectedRows, setSelectedRows] = useState<string[]>([]);
 
     useEffect(() => {
+
         if (!connectionStatus) {
             setNotification({ message: 'Connection lost. Prices may not be accurate.', type: 'error' });
         } else {
@@ -45,24 +47,18 @@ const StockSubscriber = () => {
     }, []);
 
     return (
-        <div>
-            <ISINInput value={isinInput} onChange={handleISINChange} errorMessage={errorMessage} />
-            <Button
-                ariaLabel="subscribe"
-                onClick={() => stockService.subscribeToStock(isinInput)}
-                disabled={!isValidISIN || !connectionStatus}
-            >
-                Subscribe
-            </Button>
-            <Button
-            ariaLabel="unsubscribe"
-                onClick={() => stockService.unsubscribeFromStocks([isinInput])}
-                disabled={!subscriptions.includes(isinInput) || !connectionStatus}
-            >
-                Unsubscribe
-            </Button>
+        <section>
+            <form >
+                <ISINInput value={isinInput} onChange={handleISINChange} errorMessage={errorMessage} />
+                <SubscribeUnsubscribeButton
+                    isin={isinInput}
+                    isValidISIN={isValidISIN}
+                    connectionStatus={connectionStatus}
+                />
+            </form>
+
             {stocksData.length > 0 && (
-                <>
+                <section>
                     <Table<StockData>
                         data={stocksData}
                         columns={columns}
@@ -70,16 +66,16 @@ const StockSubscriber = () => {
                         selectable
                     />
                     <Button
-                    ariaLabel="unsubscribe from selected"
+                        ariaLabel="unsubscribe from selected"
                         onClick={handleBulkUnsubscribe}
                         disabled={!selectedRows.length || !connectionStatus}
                     >
                         Unsubscribe From Selected
                     </Button>
-                </>
+                </section>
             )}
             {notification && <NotificationCard message={notification.message} type={notification.type} />}
-        </div>
+        </section>
     );
 };
 

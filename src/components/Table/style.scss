@@ -1,72 +1,79 @@
-.table-conatiner{
-    width: 100%;
-    overflow: auto;
-    .table {
-        background-color: black;
-        color: white;
-        border-collapse: collapse;
-        width: 100%;
-        margin: 20px 0;
-        overflow-x: auto;  // Enables horizontal scrolling on smaller screens
-      
-        thead {
-          th {
-            background-color: #333;
-            padding: 10px 20px;
-            text-align: left;
-            font-weight: bold;
-            border-bottom: 2px solid grey;
-          }
-        }
-      
-        tbody {
-          tr {
-            &:hover {
-              background-color: #555;
-            }
-      
-            td {
-              padding: 8px 20px;
-              border-bottom: 1px solid #444;
-      
-              &:hover {
-                background-color: #666;
-              }
-            }
-          }
-      
-          tr:last-child {
-            td {
-              border-bottom: none;
-            }
-          }
-        }
-    
-        input[type="checkbox"] {
-            margin-left: auto;
-            margin-right: auto;
-            display: block;
-            &:hover{
-                cursor: pointer;
-            }
-          }
-      
-        // Responsive styling for tablets
-        @media (max-width: 768px) {
-          thead th, tbody td {
-            padding: 6px 15px;  // Reduce padding for smaller screens
-          }
-        }
-      
-        // More specific styles for mobile devices
-        @media (max-width: 480px) {
-          font-size: 0.9em;  // Smaller text to fit more content
-      
-          thead th, tbody td {
-            padding: 4px 10px;
-          }
-        }
-      }
-}
+.table-container {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 8px;
+  .table-wrapper {
+      max-height: 400px; // Adjust as needed
+      overflow-y: auto;
+  }
 
-  
+  .table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: black;
+      color: white;
+      margin: 20px 0;
+
+      thead {
+          position: sticky;
+          top: 0;
+          background-color: #333;
+
+          th {
+              padding: 10px 20px;
+              text-align: left;
+              font-weight: bold;
+              border-bottom: 2px solid grey;
+          }
+      }
+
+      tbody {
+          tr {
+              &:hover {
+                  background-color: #555;
+              }
+
+              td {
+                  padding: 8px 20px;
+                  border-bottom: 1px solid #444;
+
+                  &:hover {
+                      background-color: #666;
+                  }
+              }
+          }
+
+          tr:last-child {
+              td {
+                  border-bottom: none;
+              }
+          }
+      }
+
+      input[type="checkbox"] {
+          margin-left: auto;
+          margin-right: auto;
+          display: block;
+
+          &:hover {
+              cursor: pointer;
+          }
+      }
+
+      // Responsive styling for tablets
+      @media (max-width: 768px) {
+          thead th, tbody td {
+              padding: 6px 15px;  // Reduce padding for smaller screens
+          }
+      }
+
+      // More specific styles for mobile devices
+      @media (max-width: 480px) {
+          font-size: 0.9em;  // Smaller text to fit more content
+
+          thead th, tbody td {
+              padding: 4px 10px;
+          }
+      }
+  }
+}

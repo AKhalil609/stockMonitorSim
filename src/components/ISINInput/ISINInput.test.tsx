@@ -4,7 +4,7 @@ import ISINInput from './';
 describe('ISINInput', () => {
   it('should display error message for invalid ISIN', () => {
     const errorMessage = 'Invalid ISIN';
-    render(<ISINInput value="" onChange={() => {}} errorMessage={errorMessage} />);
+    render(<ISINInput value="asdf" onChange={() => {}} errorMessage={errorMessage} />);
     expect(screen.getByText(errorMessage)).toBeInTheDocument();
   });
 
