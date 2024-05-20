@@ -1,5 +1,5 @@
-import { type ReactNode } from "react";
-import "./style.scss";
+import { type ReactNode } from 'react';
+import './style.scss';
 
 interface ButtonProps {
   children: ReactNode;
@@ -10,10 +10,13 @@ interface ButtonProps {
 
 const Button = ({ children, onClick, disabled, ariaLabel }: ButtonProps) => {
   return (
-    <button aria-label={ariaLabel} onClick={onClick} className="button" disabled={disabled}>
-      <span className="button-content">
-        {children}
-      </span>
+    <button
+      aria-label={ariaLabel}
+      onClick={onClick}
+      className="button"
+      disabled={disabled}
+    >
+      <span className="button-content">{children}</span>
     </button>
   );
 };

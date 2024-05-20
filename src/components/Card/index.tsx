@@ -1,14 +1,12 @@
 import { type ReactNode } from 'react';
-import "./style.scss";
+import './style.scss';
 
 interface CardProps {
-    children: ReactNode;
-  }
-
-const Card = ({children}:CardProps) => {
-  return (
-    <div className="card">{children}</div>
-  )
+  children: ReactNode;
 }
+
+const Card = ({ children }: CardProps) => {
+  return <div className="card">{children}</div>;
+};
 
 export default Card;

@@ -1,9 +1,11 @@
-const debounce = (func: Function, wait: number) => {
-    let timeout: ReturnType<typeof setTimeout>;
-    return (...args: any[]) => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => func(...args), wait);
-    };
-  };
+type Procedure<T extends string[]> = (...args: T) => void;
 
-  export default debounce;
+const debounce = <F extends Procedure<string[]>>(func: F, wait: number) => {
+  let timeout: ReturnType<typeof setTimeout>;
+  return (...args: Parameters<F>): void => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func(...args), wait);
+  };
+};
+
+export default debounce;

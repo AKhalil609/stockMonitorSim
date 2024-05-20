@@ -1,11 +1,9 @@
 .table-container {
   width: 100%;
-  overflow: hidden;
+  max-height: 400px;
+  overflow-y: auto;
   margin-bottom: 8px;
-  .table-wrapper {
-      max-height: 400px; // Adjust as needed
-      overflow-y: auto;
-  }
+
 
   .table {
       width: 100%;
@@ -60,16 +58,16 @@
           }
       }
 
-      // Responsive styling for tablets
+      // For tablets
       @media (max-width: 768px) {
           thead th, tbody td {
-              padding: 6px 15px;  // Reduce padding for smaller screens
+              padding: 6px 15px;
           }
       }
 
-      // More specific styles for mobile devices
+      // For mobile devices
       @media (max-width: 480px) {
-          font-size: 0.9em;  // Smaller text to fit more content
+          font-size: 0.9em;
 
           thead th, tbody td {
               padding: 4px 10px;

@@ -1,14 +1,10 @@
-import Button from './components/Button'
-import Card from './components/Card'
-import Header from './components/Header'
-import TextField from './components/TextField'
-import "./App.scss"
-import StockSubscriber from './components/StockSubscriber'
+import Header from './components/Header';
+import './App.scss';
+import StockSubscriber from './components/StockSubscriber';
 
 function App() {
-
   return (
-    <div id='app'>
+    <div id="app">
       <Header />
       <main className="main">
         <h1 className="heading1">Welcome to stock subscription simulator</h1>
@@ -42,7 +38,7 @@ function App() {
         <StockSubscriber />
       </main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

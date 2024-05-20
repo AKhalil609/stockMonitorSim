@@ -8,8 +8,8 @@ jest.mock('../../services/StockService', () => {
     StockService: jest.fn().mockImplementation(() => ({
       getStocksData: jest.fn(),
       getSubscriptions: jest.fn(),
-      getConnectionStatus: jest.fn()
-    }))
+      getConnectionStatus: jest.fn(),
+    })),
   };
 });
 
@@ -20,8 +20,12 @@ describe('useStockService', () => {
 
   beforeEach(() => {
     (stockService.getStocksData as jest.Mock).mockReturnValue(stocksData$);
-    (stockService.getSubscriptions as jest.Mock).mockReturnValue(subscriptions$);
-    (stockService.getConnectionStatus as jest.Mock).mockReturnValue(connectionStatus$);
+    (stockService.getSubscriptions as jest.Mock).mockReturnValue(
+      subscriptions$
+    );
+    (stockService.getConnectionStatus as jest.Mock).mockReturnValue(
+      connectionStatus$
+    );
   });
 
   it('should return initial values', () => {
@@ -36,10 +40,12 @@ describe('useStockService', () => {
     const { result } = renderHook(() => useStockService());
 
     act(() => {
-      stocksData$.next([{ isin: '123456', price: 100, ask:300, bid:898 }]);
+      stocksData$.next([{ isin: '123456', price: 100, ask: 300, bid: 898 }]);
     });
 
-    expect(result.current.stocksData).toEqual([{ isin: '123456', price: 100, ask:300, bid:898 }]);
+    expect(result.current.stocksData).toEqual([
+      { isin: '123456', price: 100, ask: 300, bid: 898 },
+    ]);
   });
 
   it('should update subscriptions when new data is emitted', () => {
