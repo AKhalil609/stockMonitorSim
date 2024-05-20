@@ -1,6 +1,6 @@
-import { BehaviorSubject, timer, Observable } from 'rxjs';
+import { BehaviorSubject, timer, Observable, combineLatest } from 'rxjs';
 import { WebSocketSubject } from 'rxjs/webSocket';
-import { switchMap, catchError, bufferTime } from 'rxjs/operators';
+import { switchMap, catchError, bufferTime, map } from 'rxjs/operators';
 import { validateImmediately } from '../components/hooks/useISINValidation';
 
 export interface StockData {
@@ -205,12 +205,16 @@ export class StockService {
   }
 
   /**
-   * Returns an observable of the current stock data, sampled every second.
+   * Returns an observable of the current stock data, filtered by the current subscriptions.
    * @returns An observable emitting the current stock data.
    */
 
   getStocksData(): Observable<StockData[]> {
-    return this.stocksData.asObservable();
+    return combineLatest([this.stocksData, this.subscriptions]).pipe(
+      map(([stocks, subs]) =>
+        stocks.filter((stock) => subs.includes(stock.isin))
+      )
+    );
   }
 
   /**

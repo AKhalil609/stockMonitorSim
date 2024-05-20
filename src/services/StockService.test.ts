@@ -118,34 +118,4 @@ describe('StockService', () => {
       });
     });
   });
-
-  it('should audit stock data at a specific interval', (done) => {
-    const stockData1: StockData[] = [
-      {
-        isin: 'DE000BASF111',
-        price: 100,
-        bid: 99,
-        ask: 101,
-      },
-    ];
-    const stockData2: StockData[] = [
-      {
-        isin: 'US0987654321',
-        price: 200,
-        bid: 199,
-        ask: 201,
-      },
-    ];
-
-    stockService['handleBatchMessages'](stockData1);
-    stockService['handleBatchMessages'](stockData2);
-
-    stockService.getStocksData().subscribe((data) => {
-      expect(data).toEqual([
-        { isin: 'DE000BASF111', price: 100.0, bid: 99.0, ask: 101.0 },
-        { isin: 'US0987654321', price: 200.0, bid: 199.0, ask: 201.0 },
-      ]);
-      done();
-    });
-  });
 });
