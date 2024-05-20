@@ -35,17 +35,28 @@ describe('Table Component', () => {
 
   it('renders selectable table and handles selection', () => {
     const onSelectionChange = jest.fn();
-    render(<Table data={data} columns={columns} selectable onSelectionChange={onSelectionChange} />);
+    render(
+      <Table
+        data={data}
+        columns={columns}
+        selectable
+        onSelectionChange={onSelectionChange}
+      />
+    );
 
     const selectAllCheckbox = screen.getByLabelText('select-all-checkbox');
     expect(selectAllCheckbox).toBeInTheDocument();
 
     data.forEach((item) => {
-      expect(screen.getByLabelText(`${item.isin}-checkbox`)).toBeInTheDocument();
+      expect(
+        screen.getByLabelText(`${item.isin}-checkbox`)
+      ).toBeInTheDocument();
     });
 
     fireEvent.click(screen.getByLabelText('123-checkbox'));
-    expect(onSelectionChange).toHaveBeenCalledWith([{ isin: '123', name: 'Stock A', price: 100 }]);
+    expect(onSelectionChange).toHaveBeenCalledWith([
+      { isin: '123', name: 'Stock A', price: 100 },
+    ]);
 
     fireEvent.click(screen.getByLabelText('456-checkbox'));
     expect(onSelectionChange).toHaveBeenCalledWith([
@@ -54,7 +65,9 @@ describe('Table Component', () => {
     ]);
 
     fireEvent.click(screen.getByLabelText('123-checkbox'));
-    expect(onSelectionChange).toHaveBeenCalledWith([{ isin: '456', name: 'Stock B', price: 200 }]);
+    expect(onSelectionChange).toHaveBeenCalledWith([
+      { isin: '456', name: 'Stock B', price: 200 },
+    ]);
 
     fireEvent.click(selectAllCheckbox);
     expect(onSelectionChange).toHaveBeenCalledWith(data);

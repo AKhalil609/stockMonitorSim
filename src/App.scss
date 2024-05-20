@@ -17,3 +17,14 @@
 .component-list {
   padding: 0 0 0 12px;
 }
+
+.main-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  // For mobile devices
+  @media (max-width: 480px) {
+    align-items: start;
+  }
+}
